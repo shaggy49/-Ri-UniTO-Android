@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/logincontraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="420dp"
+        android:layout_height="51dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/loginToolbar"
+            android:layout_width="410dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="Prenotazioni"
+            app:titleTextColor="@color/white" />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <EditText
+        android:id="@+id/insertEmail"
+        android:layout_width="389dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/prompt_email"
+        android:imeOptions="actionDone"
+        android:autofillHints="@string/prompt_email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toTopOf="@+id/insertPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/insertPassword"
+        android:layout_width="386dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="@string/prompt_password"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/prompt_password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insertEmail" />
+
+    <Button
+        android:id="@+id/logInButton"
+        android:layout_width="374dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="64dp"
+        android:fontFamily="@font/manropebold"
+        android:text="@string/action_sign_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insertPassword"
+        app:layout_constraintVertical_bias="0.933" />
+
+    <Button
+        android:id="@+id/cancelLogInButton"
+        android:layout_width="370dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/manropebold"
+        android:text="Annulla"
+        android:textColor="@color/purple_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957" />
+
+    <TextView
+        android:id="@+id/logInDescription"
+        android:layout_width="98dp"
+        android:layout_height="30dp"
+        android:fontFamily="@font/manropebold"
+        android:text="Accedi"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.168" />
+
+    <TextView
+        android:id="@+id/loginDescription"
+        android:layout_width="205dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="61dp"
+        android:fontFamily="@font/manropebold"
+        android:text="Inserisci le tue credenziali"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/insertEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logInDescription"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
