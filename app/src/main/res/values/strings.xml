@@ -20,6 +20,6 @@
     <string name="wednesday_fragment">wednesday</string>
     <string name="thursday_fragment">thursday</string>
     <string name="friday_fragment">friday</string>
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

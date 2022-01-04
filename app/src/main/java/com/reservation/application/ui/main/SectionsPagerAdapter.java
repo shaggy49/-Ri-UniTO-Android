@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.reservation.application.MondayFragment;
+import com.reservation.application.days.of.the.week.FridayFragment;
+import com.reservation.application.days.of.the.week.MondayFragment;
 import com.reservation.application.R;
-import com.reservation.application.ThursdayFragment;
-import com.reservation.application.TuesdayFragment;
+import com.reservation.application.days.of.the.week.ThursdayFragment;
+import com.reservation.application.days.of.the.week.TuesdayFragment;
+import com.reservation.application.days.of.the.week.WednesdayFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -37,7 +39,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 1 :
                 return new TuesdayFragment();
             case 2 :
+                return new WednesdayFragment();
+            case 3 :
                 return new ThursdayFragment();
+            case 4 :
+                return new FridayFragment();
         }
         return new MondayFragment();
     }
