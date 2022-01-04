@@ -6,14 +6,11 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.reservation.application.ui.main.SectionsPagerAdapter;
 import com.reservation.application.databinding.ActivityMainBinding;
@@ -44,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.activity_main_menu,menu);
         return true;
     }
+
+    
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
