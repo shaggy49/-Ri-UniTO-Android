@@ -95,17 +95,17 @@
 
     <TextView
         android:id="@+id/logInDescription"
-        android:layout_width="98dp"
-        android:layout_height="30dp"
+        android:layout_width="99dp"
+        android:layout_height="44dp"
         android:fontFamily="@font/manropebold"
         android:text="Accedi"
-        android:textSize="24sp"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.17" />
 
     <TextView
         android:id="@+id/loginDescription"
@@ -115,10 +115,10 @@
         android:layout_marginBottom="61dp"
         android:fontFamily="@font/manropebold"
         android:text="Inserisci le tue credenziali"
-        android:textSize="15sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/insertEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logInDescription"
         app:layout_constraintVertical_bias="0.0" />

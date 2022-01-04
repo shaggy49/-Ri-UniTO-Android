@@ -8,4 +8,18 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="tab_text_1">Lunedì</string>
+    <string name="tab_text_2">Martedì</string>
+    <string name="tab_text_3">Mercoledì</string>
+    <string name="tab_text_4">Giovedì</string>
+    <string name="tab_text_5">Venerdì</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="monday_fragment">monday</string>
+    <string name="tuesday_fragment">tuesday</string>
+    <string name="wednesday_fragment">wednesday</string>
+    <string name="thursday_fragment">thursday</string>
+    <string name="friday_fragment">friday</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
