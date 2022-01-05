@@ -1,4 +1,4 @@
-package com.reservation.application.days.of.the.week;
+package com.reservation.application.fragments.main;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.reservation.application.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link WednesdayFragment#newInstance} factory method to
+ * Use the {@link TuesdayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WednesdayFragment extends Fragment {
+public class TuesdayFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class WednesdayFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public WednesdayFragment() {
+    public TuesdayFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class WednesdayFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WednesdayFragment.
+     * @return A new instance of fragment TuesdayFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WednesdayFragment newInstance(String param1, String param2) {
-        WednesdayFragment fragment = new WednesdayFragment();
+    public static TuesdayFragment newInstance(String param1, String param2) {
+        TuesdayFragment fragment = new TuesdayFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class WednesdayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wednesday, container, false);
+        return inflater.inflate(R.layout.fragment_tuesday, container, false);
     }
 }

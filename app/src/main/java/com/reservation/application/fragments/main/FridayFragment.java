@@ -1,4 +1,4 @@
-package com.reservation.application.days.of.the.week;
+package com.reservation.application.fragments.main;
 
 import android.os.Bundle;
 

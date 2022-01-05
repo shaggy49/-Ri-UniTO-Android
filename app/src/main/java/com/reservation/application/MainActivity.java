@@ -50,10 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.le_mie_prenotazioni:
                         startActivity(new Intent(getApplicationContext(), MyReservationActivity.class));
                         overridePendingTransition(0,0);
-                        Toast.makeText(getApplicationContext(), "Hai cliccato su le mie prenotazioni", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.prenota:
-                        Toast.makeText(getApplicationContext(), "Hai cliccato su prenota", Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return false;

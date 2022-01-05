@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.reservation.application.days.of.the.week.FridayFragment;
-import com.reservation.application.days.of.the.week.MondayFragment;
+import com.reservation.application.fragments.main.FridayFragment;
+import com.reservation.application.fragments.main.MondayFragment;
 import com.reservation.application.R;
-import com.reservation.application.days.of.the.week.ThursdayFragment;
-import com.reservation.application.days.of.the.week.TuesdayFragment;
-import com.reservation.application.days.of.the.week.WednesdayFragment;
+import com.reservation.application.fragments.main.ThursdayFragment;
+import com.reservation.application.fragments.main.TuesdayFragment;
+import com.reservation.application.fragments.main.WednesdayFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
