@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/prenota"
         android:title="Prenota"
         android:icon="@drawable/ic_prenota"
         app:showAsAction="always" />
     <item
+        android:id="@+id/le_mie_prenotazioni"
         android:title="Le mie prenotazioni"
         android:icon="@drawable/ic_mie_prenotazioni"
         app:showAsAction="always"/>
