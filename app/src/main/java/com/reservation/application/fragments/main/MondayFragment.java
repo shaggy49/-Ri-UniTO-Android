@@ -2,20 +2,30 @@ package com.reservation.application.fragments.main;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.reservation.application.R;
+import com.reservation.application.ReservationAvailableAdapter;
+import com.reservation.application.dto.ReservationAvailableDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MondayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MondayFragment extends Fragment {
+public class MondayFragment extends ListFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,4 +75,40 @@ public class MondayFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_monday, container, false);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
+        String[] countries = {"ciao", "come", "stai"};
+
+        super.onActivityCreated(savedInstanceState);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, countries);
+
+        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
+            add(new ReservationAvailableDTO("Programmazione III", "Mario Rossi", "15:00"));
+            add(new ReservationAvailableDTO("Tecnologie Web", "Mario Rossi", "15:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "15:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "15:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
+            add(new ReservationAvailableDTO("Programmazione I", "Mario Rossi", "16:00"));
+            add(new ReservationAvailableDTO("Logica", "Mario Rossi", "16:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "18:00"));
+        }};
+
+        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), reservationsAvailable);
+
+        setListAdapter(adapter);
+    }
+
+    @Override
+    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
+        Toast.makeText(getActivity(), "You clicked item n° " + v.getId(), Toast.LENGTH_SHORT).show();
+    }
 }

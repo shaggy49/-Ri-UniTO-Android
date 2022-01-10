@@ -37,7 +37,7 @@ public class MyReservationActivity extends AppCompatActivity {
 
         viewPager.setAdapter(myResPageAdapter);
 
-//        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

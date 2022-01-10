@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@drawable/round_corner">
+
+    <TextView
+        android:id="@+id/course_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/manropebold"
+        android:padding="6dip"
+        android:text="Message in a bottle"
+        android:textColor="@color/white"
+        android:textSize="22dip"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+
+    <TextView
+        android:id="@+id/teacher_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/course_item"
+        android:layout_marginTop="1dip"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/manropebold"
+        android:padding="5dip"
+        android:text="Police"
+
+        android:textColor="@color/white"
+        android:textSize="17dip" />
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="5dip">
+
+
+        <ImageView
+            android:id="@+id/list_image"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:contentDescription="image"
+            android:src="@drawable/ic_book_online"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/time_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/manropebold"
+        android:layout_below="@+id/thumbnail"
+        android:layout_toRightOf="@+id/course_item"
+        android:layout_alignLeft="@id/thumbnail"
+        android:text="15:00"
+        android:textColor="@color/white"
+
+        android:textSize="18dip" />
+
+
+</RelativeLayout>
