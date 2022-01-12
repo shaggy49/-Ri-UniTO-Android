@@ -78,11 +78,7 @@ public class MondayFragment extends ListFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
-        String[] countries = {"ciao", "come", "stai"};
-
         super.onActivityCreated(savedInstanceState);
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, countries);
 
         List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
             add(new ReservationAvailableDTO("Programmazione III", "Mario Rossi", "15:00"));

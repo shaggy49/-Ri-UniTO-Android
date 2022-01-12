@@ -58,10 +58,10 @@
         android:id="@+id/time_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/manropebold"
         android:layout_below="@+id/thumbnail"
-        android:layout_toRightOf="@+id/course_item"
         android:layout_alignLeft="@id/thumbnail"
+        android:layout_toRightOf="@+id/course_item"
+        android:fontFamily="@font/manropebold"
         android:text="15:00"
         android:textColor="@color/white"
 
