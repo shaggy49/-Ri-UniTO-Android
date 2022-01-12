@@ -2,20 +2,26 @@ package com.reservation.application.fragments.myreservations;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.reservation.application.R;
+import com.reservation.application.dto.ReservationRequestedDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CompletedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CompletedFragment extends Fragment {
+public class CompletedFragment extends ListFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,5 +68,25 @@ public class CompletedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_completed, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
+        super.onActivityCreated(savedInstanceState);
+
+        List<ReservationRequestedDTO> reservationRequested = new ArrayList<ReservationRequestedDTO>(){{
+            add(new ReservationRequestedDTO("Reti I", "Mario Rossi", "Lunedì","16:00"));
+            add(new ReservationRequestedDTO("Reti I", "Mario Rossi", "Lunedì","16:00"));
+            add(new ReservationRequestedDTO("Reti I", "Mario Rossi", "Lunedì","16:00"));
+            add(new ReservationRequestedDTO("Reti I", "Mario Rossi", "Lunedì","16:00"));
+            add(new ReservationRequestedDTO("Reti I", "Mario Rossi", "Lunedì","16:00"));
+            add(new ReservationRequestedDTO("Reti I", "Mario Rossi", "Martedì","18:00"));
+            add(new ReservationRequestedDTO("Reti I", "Mario Rossi", "Venerdì","18:00"));
+        }};
+
+        MyReservationAdapter adapter = new MyReservationAdapter(getActivity(), reservationRequested);
+
+        setListAdapter(adapter);
     }
 }

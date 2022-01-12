@@ -2,20 +2,26 @@ package com.reservation.application.fragments.main;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.reservation.application.R;
+import com.reservation.application.dto.ReservationAvailableDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ThursdayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ThursdayFragment extends Fragment {
+public class ThursdayFragment extends ListFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,5 +68,32 @@ public class ThursdayFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_thursday, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
+        super.onActivityCreated(savedInstanceState);
+
+        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
+            add(new ReservationAvailableDTO("Sistemi operativi", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Elementi di probabilità", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
+        }};
+
+        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), reservationsAvailable);
+
+        setListAdapter(adapter);
     }
 }

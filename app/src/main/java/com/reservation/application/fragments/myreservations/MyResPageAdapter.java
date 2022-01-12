@@ -1,4 +1,4 @@
-package com.reservation.application;
+package com.reservation.application.fragments.myreservations;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +13,7 @@ import com.reservation.application.fragments.myreservations.TodosFragment;
 public class MyResPageAdapter extends FragmentPagerAdapter {
 
     private int nOfTabs = 3;
-    private String[] tabName = {"Da fare", "Completate", "Cancellate"};
+    private String[] tabNames = {"Da fare", "Completate", "Cancellate"};
 
     public MyResPageAdapter(@NonNull FragmentManager fm, int tabCount) {
         super(fm);
@@ -39,7 +39,7 @@ public class MyResPageAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return tabName[position];
+        return tabNames[position];
     }
 
     @Override
