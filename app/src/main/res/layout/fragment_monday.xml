@@ -11,10 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dip"
         android:layout_marginRight="15dip"
-        android:contextClickable="true"
         android:divider="@color/white"
-        android:dividerHeight="10dp"
-        android:paddingBottom="80dp"
-        tools:listitem="@layout/available_resevations_item" />
+        android:dividerHeight="15dp"
+        android:paddingBottom="20dp"
+        tools:listitem="@layout/available_resevations_item"/>
 
 </RelativeLayout>

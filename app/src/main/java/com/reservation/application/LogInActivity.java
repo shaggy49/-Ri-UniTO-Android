@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.reservation.application.R;
+
 import okhttp3.OkHttpClient;
 
 public class LogInActivity extends AppCompatActivity {

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.reservation.application.R;
-import com.reservation.application.ReservationAvailableAdapter;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
 import java.util.ArrayList;
@@ -77,20 +76,20 @@ public class WednesdayFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
-            add(new ReservationAvailableDTO("Economia e gestione dell'impresa", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Economia e diritto", "Mario Rossi", "17:00"));
             add(new ReservationAvailableDTO("Basi di dati", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("ALgoritmi e strutture dati", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "18:00"));
+            add(new ReservationAvailableDTO("Algoritmi e strutture dati", "Mario Rossi", "18:00"));
         }};
 
         ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), reservationsAvailable);

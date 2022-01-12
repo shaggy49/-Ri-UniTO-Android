@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.reservation.application.R;
-import com.reservation.application.ReservationAvailableAdapter;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.reservation.application.ui.main;
+package com.reservation.application.fragments.main.ui;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

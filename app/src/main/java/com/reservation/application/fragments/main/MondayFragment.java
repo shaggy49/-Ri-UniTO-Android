@@ -2,7 +2,6 @@ package com.reservation.application.fragments.main;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
@@ -10,11 +9,8 @@ import androidx.fragment.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.reservation.application.R;
-import com.reservation.application.ReservationAvailableAdapter;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
 import java.util.ArrayList;
@@ -84,18 +80,18 @@ public class MondayFragment extends ListFragment {
             add(new ReservationAvailableDTO("Programmazione III", "Mario Rossi", "15:00"));
             add(new ReservationAvailableDTO("Tecnologie Web", "Mario Rossi", "15:00"));
             add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "15:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "15:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
-            add(new ReservationAvailableDTO("Programmazione I", "Mario Rossi", "16:00"));
-            add(new ReservationAvailableDTO("Logica", "Mario Rossi", "16:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "18:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "15:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
+//            add(new ReservationAvailableDTO("Programmazione I", "Mario Rossi", "16:00"));
+//            add(new ReservationAvailableDTO("Logica", "Mario Rossi", "16:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "18:00"));
+//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "18:00"));
         }};
 
         ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), reservationsAvailable);
@@ -103,8 +99,8 @@ public class MondayFragment extends ListFragment {
         setListAdapter(adapter);
     }
 
-    @Override
-    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-        Toast.makeText(getActivity(), "You clicked item n° " + v.getId(), Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
+//        Toast.makeText(getActivity(), "You clicked item n° " + v.getId(), Toast.LENGTH_SHORT).show();
+//    }
 }

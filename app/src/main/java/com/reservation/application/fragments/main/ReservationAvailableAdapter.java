@@ -1,4 +1,4 @@
-package com.reservation.application;
+package com.reservation.application.fragments.main;
 
 
 import android.content.Context;
@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.reservation.application.R;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
 import java.util.List;
@@ -36,8 +39,7 @@ public class ReservationAvailableAdapter extends BaseAdapter {
         return position;
     }
     @Override
-    public View getView(int position, View v, ViewGroup vg)
-    {
+    public View getView(int position, View v, ViewGroup vg) {
         if (v==null)
         {
             v= LayoutInflater.from(context).inflate(R.layout.available_resevations_item, null);
@@ -49,6 +51,10 @@ public class ReservationAvailableAdapter extends BaseAdapter {
         txt.setText(item.getTeacher());
         txt=v.findViewById(R.id.time_item);
         txt.setText(item.getTime());
+        ImageView bookIcon = v.findViewById(R.id.book_icon);
+        bookIcon.setOnClickListener(view -> {
+            Toast.makeText(view.getContext(), "You want to book a reservation", Toast.LENGTH_SHORT).show();
+        });
         return v;
     }
 }

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.reservation.application.R;
-import com.reservation.application.ReservationAvailableAdapter;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
 import java.util.ArrayList;
@@ -77,7 +76,7 @@ public class FridayFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
-            add(new ReservationAvailableDTO("Sviluppo Applicazioni software", "Mario Rossi", "17:00"));
+            add(new ReservationAvailableDTO("Sviluppo software", "Mario Rossi", "17:00"));
             add(new ReservationAvailableDTO("Reti II", "Mario Rossi", "17:00"));
             add(new ReservationAvailableDTO("Ricerca operativa", "Mario Rossi", "17:00"));
             add(new ReservationAvailableDTO("Ricerca operativa", "Mario Rossi", "17:00"));

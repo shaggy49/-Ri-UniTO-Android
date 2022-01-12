@@ -1,4 +1,4 @@
-package com.reservation.application;
+package com.reservation.application.fragments.myreservations;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
