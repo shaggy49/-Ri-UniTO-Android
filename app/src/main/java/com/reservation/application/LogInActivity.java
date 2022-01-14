@@ -36,36 +36,6 @@ public class LogInActivity extends AppCompatActivity {
         *
         * */
 
-        /*cancelSigninButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Log.i(TAG, "onClick: bottone cliccato");
-//                Toast.makeText(getApplicationContext(), "Email: " + email.getText().toString() + ", Pw: " + password.getText().toString(), Toast.LENGTH_SHORT).show();
-                Request request = new Request.Builder()
-                        .url(" http://10.0.2.2:8080/reservation_application_war_exploded/available-reservations")
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        if (response.isSuccessful()) {
-                            ResponseBody responseBody = response.body();
-                            String body = responseBody.string();
-                            Log.i(TAG, "onResponse (raw): " + body);
-                            Gson gson = new Gson();
-                            Type listOfAvResObject = new TypeToken<ArrayList<ReservationAvailable>>() {}.getType();
-                            List<ReservationAvailable> outputList = gson.fromJson(body, listOfAvResObject);
-                            Log.i(TAG, "onResponse (gson): " + outputList);
-                        }
-                    }
-                });
-            }
-        });*/
     }
 
 }

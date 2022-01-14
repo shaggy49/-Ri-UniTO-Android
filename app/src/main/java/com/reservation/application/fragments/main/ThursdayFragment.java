@@ -10,11 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.reservation.application.R;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import entities.ReservationAvailable;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,25 +87,42 @@ public class ThursdayFragment extends ListFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
-            add(new ReservationAvailableDTO("Sistemi operativi", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Elementi di probabilità", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Analisi matematica", "Mario Rossi", "18:00"));
-        }};
+        OkHttpClient client = new OkHttpClient();
 
-        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), reservationsAvailable);
+        Request request = new Request.Builder()
+                .url(" https://reservationapplication.herokuapp.com/available-reservations")
+                .build();
 
-        setListAdapter(adapter);
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    ResponseBody responseBody = response.body();
+                    String body = responseBody.string();
+                    Gson gson = new Gson();
+                    Type listOfAvResObject = new TypeToken<ArrayList<ReservationAvailable>>() {}.getType();
+                    List<ReservationAvailable> outputList = gson.fromJson(body, listOfAvResObject);
+                    getActivity().runOnUiThread(() -> {
+
+                        List<ReservationAvailableDTO> mondayReservations = new ArrayList<>();
+
+                        for (ReservationAvailable reservation : outputList) {
+                            if(reservation.getDate().equals("gio")) {
+                                mondayReservations.add(new ReservationAvailableDTO(reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00"));
+                            }
+                        }
+
+                        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations);
+
+                        setListAdapter(adapter);
+                    });
+                }
+            }
+        });
     }
 }
