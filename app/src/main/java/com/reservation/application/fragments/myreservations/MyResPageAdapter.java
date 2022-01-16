@@ -1,36 +1,45 @@
 package com.reservation.application.fragments.myreservations;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.reservation.application.fragments.myreservations.CancelledFragment;
-import com.reservation.application.fragments.myreservations.CompletedFragment;
-import com.reservation.application.fragments.myreservations.TodosFragment;
-
 public class MyResPageAdapter extends FragmentPagerAdapter {
 
     private int nOfTabs = 3;
     private String[] tabNames = {"Da fare", "Completate", "Cancellate"};
+    private final String cookie;
 
-    public MyResPageAdapter(@NonNull FragmentManager fm, int tabCount) {
+
+    public MyResPageAdapter(@NonNull FragmentManager fm, int tabCount, String cookie) {
         super(fm);
         this.nOfTabs = tabCount;
+        this.cookie = cookie;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putString("cookie", cookie);
 
         switch (position) {
             case 0:
-                return new TodosFragment();
+                TodosFragment todosFragment = new TodosFragment();
+                todosFragment.setArguments(bundle);
+                return todosFragment;
             case 1:
-                return new CompletedFragment();
+                CompletedFragment completedFragment = new CompletedFragment();
+                completedFragment.setArguments(bundle);
+                return completedFragment;
             case 2:
-                return new CancelledFragment();
+                CancelledFragment cancelledFragment = new CancelledFragment();
+                cancelledFragment.setArguments(bundle);
+                return cancelledFragment;
             default:
                 return null;
         }

@@ -7,7 +7,6 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabItem;
@@ -34,12 +33,12 @@ public class MyReservationActivity extends AppCompatActivity {
         reservationCancelled = findViewById(R.id.reservation_cancelled);
         viewPager = findViewById(R.id.mie_prenotazioni_ViewPager);
 
-        MyResPageAdapter myResPageAdapter = new MyResPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             cookie = extras.getString("cookie");
         }
+
+        MyResPageAdapter myResPageAdapter = new MyResPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), cookie);
 
         viewPager.setAdapter(myResPageAdapter);
 

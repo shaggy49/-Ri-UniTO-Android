@@ -79,7 +79,7 @@ public class LogInActivity extends AppCompatActivity {
                         String responseBody = response.body().string();
                         List<String> Cookielist = response.headers().values("Set-Cookie");
                         String jsessionid = (Cookielist .get(0).split(";"))[0];
-                        Log.i("COOKIE", jsessionid);
+                        Log.i("COOKIE FROM LOGIN", jsessionid);
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         i.putExtra("cookie", jsessionid);
                         i.putExtra("email", email.getText().toString());
