@@ -5,12 +5,12 @@
     <item
         android:id="@+id/prenota"
         android:title="Prenota"
-        android:icon="@drawable/ic_prenota"
+        android:icon="@drawable/booking_menu"
         app:showAsAction="always" />
     <item
         android:id="@+id/le_mie_prenotazioni"
         android:title="Le mie prenotazioni"
-        android:icon="@drawable/ic_mie_prenotazioni"
+        android:icon="@drawable/bookmark"
         app:showAsAction="always"/>
 
 </menu>

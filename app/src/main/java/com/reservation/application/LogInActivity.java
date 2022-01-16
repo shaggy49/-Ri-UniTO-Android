@@ -44,13 +44,6 @@ public class LogInActivity extends AppCompatActivity {
         logInButton = (Button) findViewById(R.id.logInButton);
         cancelSigninButton = (Button) findViewById(R.id.cancelLogInButton);
 
-        /*
-        * TODO: cose da fare la prossima volta :
-        *   + spostare quanto fatto qui sotto in un'activity a parte
-        *   + implementare la login POST
-        *
-        * */
-
         logInButton.setOnClickListener(view -> {
             OkHttpClient client = new OkHttpClient();
 
@@ -104,8 +97,9 @@ public class LogInActivity extends AppCompatActivity {
     public void popupMessage(String title, String errorMessage){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage(errorMessage);
-        alertDialogBuilder.setIcon(R.drawable.ic_error);
+        alertDialogBuilder.setIcon(R.drawable.login_error);
         alertDialogBuilder.setTitle(title);
+        alertDialogBuilder.setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }

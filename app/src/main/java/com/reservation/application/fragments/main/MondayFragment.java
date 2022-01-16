@@ -2,6 +2,7 @@ package com.reservation.application.fragments.main;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
@@ -10,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -120,22 +124,27 @@ public class MondayFragment extends ListFragment {
 
                         for (ReservationAvailable reservation : outputList) {
                             if(reservation.getDate().equals("lun")) {
-                                mondayReservations.add(new ReservationAvailableDTO(reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00"));
+                                mondayReservations.add(new ReservationAvailableDTO(reservation.getId(), reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00"));
                             }
                         }
 
-                        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations);
+                        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations, cookie);
 
                         setListAdapter(adapter);
                     });
                 }
             }
         });
-
 //        if(cookie != null)
 //            Log.i("COOKIE FROM MONDAY FRAGMENT", cookie);
-
-
     }
+//
+//    @Override
+//    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
+//        ImageView bookIcon = v.findViewById(R.id.book_icon);
+//        bookIcon.setOnClickListener(view -> {
+//            Toast.makeText(view.getContext(), "You want to book reservation n° " + id, Toast.LENGTH_SHORT).show();
+//        });
+//    }
 
 }

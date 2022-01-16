@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/loginMainButton"
         android:icon="@drawable/ic_login_"
+        app:iconTint="@color/white"
         android:title="Accedi"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 </menu>

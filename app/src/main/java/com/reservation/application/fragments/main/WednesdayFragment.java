@@ -113,11 +113,11 @@ public class WednesdayFragment extends ListFragment {
 
                         for (ReservationAvailable reservation : outputList) {
                             if(reservation.getDate().equals("mer")) {
-                                mondayReservations.add(new ReservationAvailableDTO(reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00"));
+                                mondayReservations.add(new ReservationAvailableDTO(reservation.getId(), reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00"));
                             }
                         }
 
-                        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations);
+                        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations, cookie);
 
                         setListAdapter(adapter);
                     });
