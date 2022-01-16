@@ -1,6 +1,7 @@
 package com.reservation.application.fragments.main.ui;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -24,10 +25,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3, R.string.tab_text_4, R.string.tab_text_5};
     private final Context mContext;
+    private final String cookie;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    public SectionsPagerAdapter(Context context, FragmentManager fm, String cookie) {
         super(fm);
         mContext = context;
+        this.cookie = cookie;
     }
 
     @Override
@@ -35,17 +38,31 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
 //        return PlaceholderFragment.newInstance(position + 1);
+        Bundle bundle = new Bundle();
+        bundle.putString("cookie", cookie);
         switch (position) {
+            case 0:
+                MondayFragment mondayFragment = new MondayFragment();
+                mondayFragment.setArguments(bundle);
+                return mondayFragment;
             case 1 :
-                return new TuesdayFragment();
+                TuesdayFragment tuesdayFragment = new TuesdayFragment();
+                tuesdayFragment.setArguments(bundle);
+                return tuesdayFragment;
             case 2 :
-                return new WednesdayFragment();
+                WednesdayFragment wednesdayFragment = new WednesdayFragment();
+                wednesdayFragment.setArguments(bundle);
+                return wednesdayFragment;
             case 3 :
-                return new ThursdayFragment();
+                ThursdayFragment thursdayFragment = new ThursdayFragment();
+                thursdayFragment.setArguments(bundle);
+                return thursdayFragment;
             case 4 :
-                return new FridayFragment();
+                FridayFragment fridayFragment = new FridayFragment();
+                fridayFragment.setArguments(bundle);
+                return fridayFragment;
         }
-        return new MondayFragment();
+        return null;
     }
 
     @Nullable

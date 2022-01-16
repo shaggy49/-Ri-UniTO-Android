@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -39,11 +38,11 @@ public class MondayFragment extends ListFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM1 = "cookie";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String cookie;
     private String mParam2;
 
     public MondayFragment() {
@@ -72,7 +71,7 @@ public class MondayFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            cookie = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -111,7 +110,7 @@ public class MondayFragment extends ListFragment {
                     Type listOfAvResObject = new TypeToken<ArrayList<ReservationAvailable>>() {}.getType();
                     List<ReservationAvailable> outputList = gson.fromJson(body, listOfAvResObject);
 //                    Log.i("INFO", outputList.toString());
-                    getActivity().runOnUiThread(() -> {
+                    requireActivity().runOnUiThread(() -> {
 //                        Toast.makeText(getActivity(), outputList.toString(), Toast.LENGTH_LONG).show();
 //                        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
 //                            add(new ReservationAvailableDTO(outputList.get(0).getCourse().getTitle(), outputList.get(0).getTeacher().getName() + " " + outputList.get(0).getTeacher().getSurname(), outputList.get(0).getTime() + ":00"));
@@ -133,11 +132,8 @@ public class MondayFragment extends ListFragment {
             }
         });
 
-//        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
-//            add(new ReservationAvailableDTO("Programmazione III", "Mario Rossi", "15:00"));
-//            add(new ReservationAvailableDTO("Tecnologie Web", "Mario Rossi", "15:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "15:00"));
-//        }};
+//        if(cookie != null)
+//            Log.i("COOKIE FROM MONDAY FRAGMENT", cookie);
 
 
     }
