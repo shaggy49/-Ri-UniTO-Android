@@ -14,7 +14,7 @@
         android:contextClickable="true"
         android:divider="@color/white"
         android:dividerHeight="10dp"
-        android:paddingBottom="80dp"
+        android:paddingBottom="20dp"
         tools:listitem="@layout/available_resevations_item" />
 
 </RelativeLayout>

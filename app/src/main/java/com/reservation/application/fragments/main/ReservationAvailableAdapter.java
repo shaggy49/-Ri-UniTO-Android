@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.reservation.application.R;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
@@ -18,10 +20,13 @@ import java.util.List;
 public class ReservationAvailableAdapter extends BaseAdapter {
     private List<ReservationAvailableDTO> aReservations =null;
     private Context context=null;
-    public ReservationAvailableAdapter(Context context,List<ReservationAvailableDTO> aReservations)
+    private final String cookie;
+
+    public ReservationAvailableAdapter(Context context, List<ReservationAvailableDTO> aReservations, String cookie)
     {
         this.aReservations = aReservations;
         this.context=context;
+        this.cookie = cookie;
     }
     @Override
     public int getCount()
@@ -53,8 +58,24 @@ public class ReservationAvailableAdapter extends BaseAdapter {
         txt.setText(item.getTime());
         ImageView bookIcon = v.findViewById(R.id.book_icon);
         bookIcon.setOnClickListener(view -> {
-            Toast.makeText(view.getContext(), "You want to book a reservation", Toast.LENGTH_SHORT).show();
+            if(cookie != null)
+                confirmBookReservation(view, item);
+            else
+                Toast.makeText(view.getContext(), "Accedi per prenotare una lezione", Toast.LENGTH_SHORT).show();
         });
         return v;
     }
+
+    public void confirmBookReservation(View view, ReservationAvailableDTO reservationSelected){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
+        alertDialogBuilder.setMessage("Sei sicuro di voler prenotare la lezione?");
+        alertDialogBuilder.setIcon(R.drawable.confirm);
+        alertDialogBuilder.setTitle("Conferma la prenotazione");
+        alertDialogBuilder.setPositiveButton("Si", (dialogInterface, i) -> dialogInterface.dismiss()); //qui verrà fatta la chiamata PUT (ricordarsi di notificare l'utente di avvenuta prenotazione)
+        alertDialogBuilder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+
 }

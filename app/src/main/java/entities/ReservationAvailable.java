@@ -15,6 +15,10 @@ public class ReservationAvailable {
         this.time = time;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public Teacher getTeacher() {
         return teacher;
     }

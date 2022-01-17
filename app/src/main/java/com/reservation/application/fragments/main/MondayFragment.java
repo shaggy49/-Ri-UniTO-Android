@@ -2,19 +2,36 @@ package com.reservation.application.fragments.main;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.reservation.application.R;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import entities.ReservationAvailable;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,11 +42,11 @@ public class MondayFragment extends ListFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM1 = "cookie";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String cookie;
     private String mParam2;
 
     public MondayFragment() {
@@ -58,7 +75,7 @@ public class MondayFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            cookie = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -76,31 +93,58 @@ public class MondayFragment extends ListFragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
-            add(new ReservationAvailableDTO("Programmazione III", "Mario Rossi", "15:00"));
-            add(new ReservationAvailableDTO("Tecnologie Web", "Mario Rossi", "15:00"));
-            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "15:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "15:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "16:00"));
-//            add(new ReservationAvailableDTO("Programmazione I", "Mario Rossi", "16:00"));
-//            add(new ReservationAvailableDTO("Logica", "Mario Rossi", "16:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "17:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "18:00"));
-//            add(new ReservationAvailableDTO("Reti I", "Mario Rossi", "18:00"));
-        }};
+        OkHttpClient client = new OkHttpClient();
 
-        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), reservationsAvailable);
+        Request request = new Request.Builder()
+                .url(" https://reservationapplication.herokuapp.com/available-reservations")
+                .build();
 
-        setListAdapter(adapter);
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    ResponseBody responseBody = response.body();
+                    String body = responseBody.string();
+                    Gson gson = new Gson();
+                    Type listOfAvResObject = new TypeToken<ArrayList<ReservationAvailable>>() {}.getType();
+                    List<ReservationAvailable> outputList = gson.fromJson(body, listOfAvResObject);
+//                    Log.i("INFO", outputList.toString());
+                    requireActivity().runOnUiThread(() -> {
+//                        Toast.makeText(getActivity(), outputList.toString(), Toast.LENGTH_LONG).show();
+//                        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
+//                            add(new ReservationAvailableDTO(outputList.get(0).getCourse().getTitle(), outputList.get(0).getTeacher().getName() + " " + outputList.get(0).getTeacher().getSurname(), outputList.get(0).getTime() + ":00"));
+//                        }};
+
+                        List<ReservationAvailableDTO> mondayReservations = new ArrayList<>();
+
+                        for (ReservationAvailable reservation : outputList) {
+                            if(reservation.getDate().equals("lun")) {
+                                mondayReservations.add(new ReservationAvailableDTO(reservation.getId(), reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00"));
+                            }
+                        }
+
+                        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations, cookie);
+
+                        setListAdapter(adapter);
+                    });
+                }
+            }
+        });
+//        if(cookie != null)
+//            Log.i("COOKIE FROM MONDAY FRAGMENT", cookie);
     }
-
+//
 //    @Override
 //    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-//        Toast.makeText(getActivity(), "You clicked item n° " + v.getId(), Toast.LENGTH_SHORT).show();
+//        ImageView bookIcon = v.findViewById(R.id.book_icon);
+//        bookIcon.setOnClickListener(view -> {
+//            Toast.makeText(view.getContext(), "You want to book reservation n° " + id, Toast.LENGTH_SHORT).show();
+//        });
 //    }
+
 }

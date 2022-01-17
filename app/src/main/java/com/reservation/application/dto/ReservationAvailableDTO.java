@@ -1,14 +1,20 @@
 package com.reservation.application.dto;
 
 public class ReservationAvailableDTO {
+    private int id;
     private String course;
     private String teacher;
     private String time;
 
-    public ReservationAvailableDTO(String course, String teacher, String time) {
+    public ReservationAvailableDTO(int id, String course, String teacher, String time) {
+        this.id = id;
         this.course = course;
         this.teacher = teacher;
         this.time = time;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getCourse() {

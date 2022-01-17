@@ -10,11 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.reservation.application.R;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import entities.ReservationAvailable;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,11 +37,11 @@ public class TuesdayFragment extends ListFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM1 = "cookie";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String cookie;
     private String mParam2;
 
     public TuesdayFragment() {
@@ -58,7 +70,7 @@ public class TuesdayFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            cookie = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -74,26 +86,42 @@ public class TuesdayFragment extends ListFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
+        OkHttpClient client = new OkHttpClient();
 
-        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
-            add(new ReservationAvailableDTO("Intelligenza Artificiale", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Robotica", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "17:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "18:00"));
-            add(new ReservationAvailableDTO("Linguaggi e paradigmi", "Mario Rossi", "18:00"));
-        }};
+        Request request = new Request.Builder()
+                .url(" https://reservationapplication.herokuapp.com/available-reservations")
+                .build();
 
-        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), reservationsAvailable);
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
 
-        setListAdapter(adapter);
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    ResponseBody responseBody = response.body();
+                    String body = responseBody.string();
+                    Gson gson = new Gson();
+                    Type listOfAvResObject = new TypeToken<ArrayList<ReservationAvailable>>() {}.getType();
+                    List<ReservationAvailable> outputList = gson.fromJson(body, listOfAvResObject);
+                    getActivity().runOnUiThread(() -> {
+
+                        List<ReservationAvailableDTO> mondayReservations = new ArrayList<>();
+
+                        for (ReservationAvailable reservation : outputList) {
+                            if(reservation.getDate().equals("mar")) {
+                                mondayReservations.add(new ReservationAvailableDTO(reservation.getId(), reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00"));
+                            }
+                        }
+
+                        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations, cookie);
+
+                        setListAdapter(adapter);
+                    });
+                }
+            }
+        });
     }
 }

@@ -20,6 +20,7 @@ public class MyReservationActivity extends AppCompatActivity {
     TabItem reservationCompleted;
     TabItem reservationCancelled;
     ViewPager viewPager;
+    private String cookie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,12 @@ public class MyReservationActivity extends AppCompatActivity {
         reservationCancelled = findViewById(R.id.reservation_cancelled);
         viewPager = findViewById(R.id.mie_prenotazioni_ViewPager);
 
-        MyResPageAdapter myResPageAdapter = new MyResPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            cookie = extras.getString("cookie");
+        }
+
+        MyResPageAdapter myResPageAdapter = new MyResPageAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), cookie);
 
         viewPager.setAdapter(myResPageAdapter);
 
@@ -66,7 +72,10 @@ public class MyReservationActivity extends AppCompatActivity {
                     case R.id.le_mie_prenotazioni:
                         return true;
                     case R.id.prenota:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        Intent mainActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        mainActivityIntent.putExtra("cookie", cookie);
+                        mainActivityIntent.putExtra("fromMyResActivity", true);
+                        startActivity(mainActivityIntent);
                         overridePendingTransition(0,0);
                         return true;
                 }
