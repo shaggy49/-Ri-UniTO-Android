@@ -5,5 +5,5 @@
         android:icon="@drawable/avatar"
         app:iconTint="@color/white"
         android:title="Accedi"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 </menu>
