@@ -9,6 +9,7 @@ import androidx.fragment.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -96,6 +97,9 @@ public class TuesdayFragment extends ListFragment {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                requireActivity().runOnUiThread(() -> {
+                    Toast.makeText(getActivity(), "Errore di connessione, operazione fallita", Toast.LENGTH_SHORT).show();
+                });
             }
 
             @Override

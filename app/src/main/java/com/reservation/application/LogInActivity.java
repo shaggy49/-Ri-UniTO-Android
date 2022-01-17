@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,46 +46,49 @@ public class LogInActivity extends AppCompatActivity {
         cancelSigninButton = (Button) findViewById(R.id.cancelLogInButton);
 
         logInButton.setOnClickListener(view -> {
-            OkHttpClient client = new OkHttpClient();
 
-            RequestBody formBody = new FormBody.Builder()
-                    .add("email", email.getText().toString())
-                    .add("password", password.getText().toString())
-                    .build();
+            if(validateEmailAddress(email.getText().toString())) {
+                OkHttpClient client = new OkHttpClient();
 
-            Request request = new Request.Builder()
-                    .url("https://reservationapplication.herokuapp.com/log-in")
-                    .post(formBody)
-                    .build();
+                RequestBody formBody = new FormBody.Builder()
+                        .add("email", email.getText().toString())
+                        .add("password", password.getText().toString())
+                        .build();
 
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    e.printStackTrace();
-                    runOnUiThread(() -> {
-                        popupMessage("Errore", "Server non disponibile al momento");
-                    });
-                }
+                Request request = new Request.Builder()
+                        .url("https://reservationapplication.herokuapp.com/log-in")
+                        .post(formBody)
+                        .build();
 
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if(response.isSuccessful()) {
-                        String responseBody = response.body().string();
-                        List<String> Cookielist = response.headers().values("Set-Cookie");
-                        String jsessionid = (Cookielist .get(0).split(";"))[0];
-                        Log.i("COOKIE FROM LOGIN", jsessionid);
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        i.putExtra("cookie", jsessionid);
-                        i.putExtra("email", email.getText().toString());
-                        startActivity(i);
-                    }
-                    else {
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        e.printStackTrace();
                         runOnUiThread(() -> {
-                            popupMessage("Errore", "Utente non registrato");
+                            popupMessage("Errore", "Server non disponibile al momento");
                         });
                     }
-                }
-            });
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        if(response.isSuccessful()) {
+                            String responseBody = response.body().string();
+                            List<String> Cookielist = response.headers().values("Set-Cookie");
+                            String jsessionid = (Cookielist .get(0).split(";"))[0];
+                            Log.i("COOKIE FROM LOGIN", jsessionid);
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            i.putExtra("cookie", jsessionid);
+                            i.putExtra("email", email.getText().toString());
+                            startActivity(i);
+                        }
+                        else {
+                            runOnUiThread(() -> {
+                                popupMessage("Errore", "Utente non registrato");
+                            });
+                        }
+                    }
+                });
+            }
         });
 
         cancelSigninButton.setOnClickListener(view -> {
@@ -102,6 +106,14 @@ public class LogInActivity extends AppCompatActivity {
         alertDialogBuilder.setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private boolean validateEmailAddress(String email) {
+        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(getApplicationContext(), "Inserisci una mail valida", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
 }

@@ -2,6 +2,7 @@ package com.reservation.application.fragments.main;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.reservation.application.R;
 import com.reservation.application.dto.ReservationAvailableDTO;
 
+import java.io.IOException;
 import java.util.List;
 
-public class ReservationAvailableAdapter extends BaseAdapter {
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+
+public class ReservationAvailableAdapter extends BaseAdapter{
     private List<ReservationAvailableDTO> aReservations =null;
     private Context context=null;
     private final String cookie;
@@ -71,11 +85,41 @@ public class ReservationAvailableAdapter extends BaseAdapter {
         alertDialogBuilder.setMessage("Sei sicuro di voler prenotare la lezione?");
         alertDialogBuilder.setIcon(R.drawable.confirm);
         alertDialogBuilder.setTitle("Conferma la prenotazione");
-        alertDialogBuilder.setPositiveButton("Si", (dialogInterface, i) -> dialogInterface.dismiss()); //qui verrà fatta la chiamata PUT (ricordarsi di notificare l'utente di avvenuta prenotazione)
+        alertDialogBuilder.setPositiveButton("Si", (dialogInterface, i) -> {
+            bookAvailableReservation(reservationSelected);
+            aReservations.remove(reservationSelected);
+            notifyDataSetChanged();
+        });
         alertDialogBuilder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
 
+    private void bookAvailableReservation(ReservationAvailableDTO reservationSelected) {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .addInterceptor(chain -> {
+                    final Request original = chain.request();
+                    final Request authorized = original.newBuilder()
+                            .addHeader("Cookie", cookie)
+                            .build();
+                    return chain.proceed(authorized);
+                })
+                .build();
 
+        HttpUrl httpUrl = new HttpUrl.Builder()
+                .scheme("https")
+                .host("reservationapplication.herokuapp.com")
+                .addPathSegment("available-reservations")
+                .addQueryParameter("idReservationAvailable", String.valueOf(reservationSelected.getId()))
+                .build();
+
+        Log.i("URL FOR BOOK RESERVATION: ", httpUrl.toString());
+
+        Request request = new Request.Builder()
+                .url(httpUrl.toString())
+                .put(RequestBody.create(null, new byte[]{}))
+                .build();
+
+        client.newCall(request).enqueue((Callback) context);
+    }
 }

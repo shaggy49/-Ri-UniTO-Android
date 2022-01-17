@@ -10,14 +10,28 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.reservation.application.dto.ReservationAvailableDTO;
 import com.reservation.application.fragments.main.ui.SectionsPagerAdapter;
 import com.reservation.application.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+
+public class MainActivity extends AppCompatActivity implements Callback{
 
     private ActivityMainBinding binding;
     private String cookie;
@@ -88,4 +102,26 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
         return true;
     }
+
+    @Override
+    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+        e.printStackTrace();
+    }
+
+    @Override
+    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+        if(response.isSuccessful()) {
+            runOnUiThread(() -> {
+                Toast.makeText(this, "Prenotazione effettuata!", Toast.LENGTH_SHORT).show();
+            });
+        }
+        else {
+            ResponseBody responseBody = response.body();
+            String body = responseBody.string();
+            runOnUiThread(() -> {
+                Toast.makeText(this, body.trim(), Toast.LENGTH_LONG).show();
+            });
+        }
+    }
+
 }

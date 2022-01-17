@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -107,7 +108,9 @@ public class TodosFragment extends ListFragment {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 e.printStackTrace();
-                //TODO: stampare popup di errore
+                requireActivity().runOnUiThread(() -> {
+                    Toast.makeText(getActivity(), "Errore di connessione, operazione fallita", Toast.LENGTH_SHORT).show();
+                });
             }
 
             @Override
@@ -137,7 +140,5 @@ public class TodosFragment extends ListFragment {
             }
         });
 
-        if(cookie != null)
-            Log.i("COOKIE FROM REQUESTED", cookie);
     }
 }

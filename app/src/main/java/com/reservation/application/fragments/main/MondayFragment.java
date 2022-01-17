@@ -44,6 +44,7 @@ public class MondayFragment extends ListFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "cookie";
     private static final String ARG_PARAM2 = "param2";
+    private ReservationAvailableAdapter adapter;
 
     // TODO: Rename and change types of parameters
     private String cookie;
@@ -103,6 +104,9 @@ public class MondayFragment extends ListFragment {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                requireActivity().runOnUiThread(() -> {
+                    Toast.makeText(getActivity(), "Errore di connessione, operazione fallita", Toast.LENGTH_SHORT).show();
+                });
             }
 
             @Override
@@ -115,36 +119,24 @@ public class MondayFragment extends ListFragment {
                     List<ReservationAvailable> outputList = gson.fromJson(body, listOfAvResObject);
 //                    Log.i("INFO", outputList.toString());
                     requireActivity().runOnUiThread(() -> {
-//                        Toast.makeText(getActivity(), outputList.toString(), Toast.LENGTH_LONG).show();
-//                        List<ReservationAvailableDTO> reservationsAvailable = new ArrayList<ReservationAvailableDTO>(){{
-//                            add(new ReservationAvailableDTO(outputList.get(0).getCourse().getTitle(), outputList.get(0).getTeacher().getName() + " " + outputList.get(0).getTeacher().getSurname(), outputList.get(0).getTime() + ":00"));
-//                        }};
 
                         List<ReservationAvailableDTO> mondayReservations = new ArrayList<>();
 
                         for (ReservationAvailable reservation : outputList) {
                             if(reservation.getDate().equals("lun")) {
-                                mondayReservations.add(new ReservationAvailableDTO(reservation.getId(), reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00"));
+                                ReservationAvailableDTO mondayReservation = new ReservationAvailableDTO(reservation.getId(), reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getTime() + ":00");
+                                mondayReservations.add(mondayReservation);
                             }
                         }
 
-                        ReservationAvailableAdapter adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations, cookie);
+                        adapter = new ReservationAvailableAdapter(getActivity(), mondayReservations, cookie);
 
                         setListAdapter(adapter);
                     });
                 }
             }
         });
-//        if(cookie != null)
-//            Log.i("COOKIE FROM MONDAY FRAGMENT", cookie);
+
     }
-//
-//    @Override
-//    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-//        ImageView bookIcon = v.findViewById(R.id.book_icon);
-//        bookIcon.setOnClickListener(view -> {
-//            Toast.makeText(view.getContext(), "You want to book reservation n° " + id, Toast.LENGTH_SHORT).show();
-//        });
-//    }
 
 }
