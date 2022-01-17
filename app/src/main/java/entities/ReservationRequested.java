@@ -20,6 +20,10 @@ public class ReservationRequested {
         this.status = status;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public User getUser() {
         return user;
     }

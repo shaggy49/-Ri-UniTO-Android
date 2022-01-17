@@ -123,7 +123,7 @@ public class CancelledFragment extends ListFragment {
 
                         for (ReservationRequested reservation : outputList) {
                             if(reservation.getStatus().equals("deleted")) {
-                                ReservationRequestedDTO todoReservation = new ReservationRequestedDTO(reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getrDate(), reservation.getrTime());
+                                ReservationRequestedDTO todoReservation = new ReservationRequestedDTO(reservation.getId(), reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getrDate(), reservation.getrTime());
                                 todoReservations.add(todoReservation);
                             }
                         }

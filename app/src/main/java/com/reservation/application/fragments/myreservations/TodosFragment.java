@@ -127,12 +127,12 @@ public class TodosFragment extends ListFragment {
 
                         for (ReservationRequested reservation : outputList) {
                             if(reservation.getStatus().equals("booked")) {
-                                ReservationRequestedDTO todoReservation = new ReservationRequestedDTO(reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getrDate(), reservation.getrTime());
+                                ReservationRequestedDTO todoReservation = new ReservationRequestedDTO(reservation.getId(), reservation.getCourse().getTitle(), reservation.getTeacher().getName() + " " + reservation.getTeacher().getSurname(), reservation.getrDate(), reservation.getrTime());
                                 todoReservations.add(todoReservation);
                             }
                         }
 
-                        MyReservationTodoAdapter adapter = new MyReservationTodoAdapter(getActivity(), todoReservations);
+                        MyReservationTodoAdapter adapter = new MyReservationTodoAdapter(getActivity(), todoReservations, cookie);
 
                         setListAdapter(adapter);
                     });

@@ -7,13 +7,21 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.reservation.application.fragments.myreservations.MyResPageAdapter;
 
-public class MyReservationActivity extends AppCompatActivity {
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+
+public class MyReservationActivity extends AppCompatActivity implements Callback {
 
     TabLayout tabLayout;
     TabItem reservationTodos;
@@ -82,5 +90,21 @@ public class MyReservationActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+        e.printStackTrace();
+    }
+
+    @Override
+    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+        if(response.isSuccessful()) {
+            ResponseBody responseBody = response.body();
+            String body = responseBody.string();
+            runOnUiThread(() -> {
+                Toast.makeText(this, body.trim(), Toast.LENGTH_SHORT).show();
+            });
+        }
     }
 }

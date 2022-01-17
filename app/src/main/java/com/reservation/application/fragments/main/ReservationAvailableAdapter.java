@@ -82,9 +82,9 @@ public class ReservationAvailableAdapter extends BaseAdapter{
 
     public void confirmBookReservation(View view, ReservationAvailableDTO reservationSelected){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
-        alertDialogBuilder.setMessage("Sei sicuro di voler prenotare la lezione?");
-        alertDialogBuilder.setIcon(R.drawable.confirm);
         alertDialogBuilder.setTitle("Conferma la prenotazione");
+        alertDialogBuilder.setIcon(R.drawable.confirm);
+        alertDialogBuilder.setMessage("Sei sicuro di voler prenotare la lezione?");
         alertDialogBuilder.setPositiveButton("Si", (dialogInterface, i) -> {
             bookAvailableReservation(reservationSelected);
             aReservations.remove(reservationSelected);

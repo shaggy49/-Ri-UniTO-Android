@@ -1,12 +1,14 @@
 package com.reservation.application.dto;
 
 public class ReservationRequestedDTO {
+    private int id;
     private String course;
     private String teacher;
     private String date;
     private String time;
 
-    public ReservationRequestedDTO(String course, String teacher, String date, String time) {
+    public ReservationRequestedDTO(int id, String course, String teacher, String date, String time) {
+        this.id = id;
         this.course = course;
         this.teacher = teacher;
 //        this.date = date;
@@ -30,12 +32,12 @@ public class ReservationRequestedDTO {
         this.time = time + ":00";
     }
 
-    public String getDate() {
-        return date;
+    public int getId() {
+        return id;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getDate() {
+        return date;
     }
 
     public String getCourse() {
