@@ -1,3 +1,3 @@
-# Reservation Application Android
+# Ri-UniTO Android
 
-The android app of the reservation application project.
+Versione android di Ri-UniTO.
